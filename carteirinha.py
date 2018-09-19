@@ -1,8 +1,9 @@
 import sys
 from PIL import Image, ImageDraw, ImageFont
+import qrcode
 
 nome='Fulano de Tal com Sobrenome Comprido'
-dre='123456789'
+dre='987654321'
 cpf='123.456.789-10'
 curso='Engenharia de Computação e Informação'
 periodoAtual='2018.2'
@@ -10,7 +11,6 @@ diaN = 1
 mesN = 1
 anoN = 2001
 dataN = str(diaN).zfill(2) + '/' + str(mesN).zfill(2) + '/' + str(anoN)
-
 
 def imprimir(x,y,texto,tamanho,drawobj):
 	f = ImageFont.truetype('KeepCalm-Medium.ttf', tamanho)
@@ -37,6 +37,11 @@ imprimir (margem, altura[3], 'DRE: '+dre+'    CPF: '+cpf,27,d)
 imprimir (margem, altura[4], 'Data de nascimento: ' + dataN,27,d)
 imprimir (margem, altura[5], 'Documento válido durante o período '+periodoAtual,27,d) #inserir data do fim do período?
 
+qrSize = 450
+qrc = qrcode.make(dre)
+qrc = qrc.resize((qrSize,qrSize))
+
+img.paste(qrc,(120,305))
 out = Image.alpha_composite(img, txt)
 out.save("carteirinha.png", "PNG")
 

@@ -1,0 +1,17 @@
+GET request
+
+	GET carteirinha.png
+	DRE: 123456789
+	Nasc: 01/01/2001
+
+Resposta do servidor
+
+	HTTP/1.1 200 OK
+	Date: Tue, 19 Sep 2018 12:48:34 GMT
+	Content-Type: image/png	
+
+Depois da linha em branco acima, o que vem aqui é o conteúdo. No caso de uma página HTML, é o código-fonte inteiro. No caso de uma imagem, pelo menos quando abro pelo browser, vem um HTML curtinho incluindo só a imagem.
+
+O exemplo abaixo foi gerado no Chrome em um Mac; o código-fonte exibido parece ser influenciado pelo browser/sistema. O fundo preto varia de acordo com o browser.
+
+<html><head><meta name="viewport" content="width=device-width, minimum-scale=0.1"><title>Z (276×183)</title></head><body style="margin: 0px; background: #0e0e0e;"><img style="-webkit-user-select: none;" src="data:image/jpeg;base64,/ENDEREÇO COMPLETO DA IMAGEM"></body></html>
