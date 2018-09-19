@@ -2,15 +2,25 @@ import sys
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-nome='Fulano de Tal com Sobrenome Comprido'
-dre='987654321'
-cpf='123.456.789-10'
-curso='Engenharia de Computação e Informação'
-periodoAtual='2018.2'
-diaN = 1
-mesN = 1
-anoN = 2001
-dataN = str(diaN).zfill(2) + '/' + str(mesN).zfill(2) + '/' + str(anoN)
+#nome='Fulano de Tal com Sobrenome Comprido'
+#dre='987654321'
+#cpf='123.456.789-10'
+#curso='Engenharia de Computação e Informação'
+#periodoAtual='2018.2'
+#diaN = 1
+#mesN = 1
+#anoN = 2001
+#dataN = str(diaN).zfill(2) + '/' + str(mesN).zfill(2) + '/' + str(anoN)
+
+nome=sys.argv[1]
+dre=sys.argv[2]
+cpf=sys.argv[3]
+curso=sys.argv[4]
+periodoAtual=sys.argv[5]
+dataN=sys.argv[6]
+
+
+
 
 def imprimir(x,y,texto,tamanho,drawobj):
 	f = ImageFont.truetype('KeepCalm-Medium.ttf', tamanho)
