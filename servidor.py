@@ -1,6 +1,5 @@
-import sys
-import qrcode
-import datetime
+import sys, io, datetime, qrcode
+from PIL import Image #, ImageDraw, ImageFont
 #import registros
 
 def makeQRC(dre):
@@ -24,7 +23,9 @@ def mes(data):
 	return ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"][data.month-1]
 
 #def gerarDocumento(dre, nome, curso, cpf, nascimento, periodoAtual):
-def gerarDocumento(dre, registro):
+def gerarDocumento(registro):
+	dre = sys.argv[1]
+	makeQRC(dre)
 	nome = registro[dre][0]
 	curso = registro[dre][1]
 	cpf = registro[dre][2]
@@ -127,11 +128,38 @@ registro = {
 		]
 }
 
+def foto3x4():
+	foto = Image.open("F"+sys.argv[1]+".png")
+	byteArray = io.BytesIO()
+	foto.save(byteArray, format="PNG")
+	byteArray = byteArray.getvalue()
+	return byteArray
+
+def montarMensagem(registro):
+	dre = sys.argv[1]
+	mensagem = 		"STATUS		0 OK\n"
+	mensagem = mensagem +	"NOME		"+registro[dre][0]+"\n"
+	mensagem = mensagem +	"CURSO		"+registro[dre][1]+"\n"
+	mensagem = mensagem +	"CPF		"+registro[dre][2]+"\n"
+	mensagem = mensagem +	"NASCIMENTO	"+registro[dre][3]+"\n"
+	mensagem = mensagem +	"FOTO		"+str(foto3x4())+"\n\n"
+	print (mensagem)
+
+def montarArquivo(registro):
+	dre = sys.argv[1]
+	arq = open("resposta.txt","w+")
+	arq.write("STATUS         0 OK\n")
+	arq.write("NOME           "+registro[dre][0]+"\n")
+	arq.write("CURSO          "+registro[dre][1]+"\n")
+	arq.write("CPF            "+registro[dre][2]+"\n")
+	arq.write("NASCIMENTO     "+registro[dre][3]+"\n")
+	arq.write("FOTO           "+str(foto3x4())+"\n\n")
+	arq.close()
+
+
 ######## EXECUTANDO ########
 
-dre=sys.argv[1]
-makeQRC(dre)
-gerarDocumento(dre, registro)
-
-#gerarDocumento("123456789", "Fulano de Tal e Qual Júnior", "Capacitação Profissional em Telessaúde", "000.111.222-33", "01/01/2001", periodoAtual())
-
+#dre=sys.argv[1]
+gerarDocumento(registro)
+#montarMensagem(registro)
+montarArquivo(registro)
