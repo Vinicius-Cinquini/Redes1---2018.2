@@ -1,16 +1,56 @@
-nome = "N"
-curso = "C"
-cpf = "CPF"
-nascimento = "Nasc."
+import sys, datetime, qrcode
 
-def gerarDocumento(registro):
+def makeQRC(dre):
+        qrSize = 450
+        qrc = qrcode.make(dre)
+        qrc = qrc.resize((qrSize,qrSize))
+        qrc.save("QR"+dre+".png","PNG")
+
+hoje = datetime.datetime.now()
+
+def periodoAtual():
+        p = 0
+        if (hoje.month >=6):
+                p=2
+        else:
+                p=1
+        return (str(hoje.year)+"."+str(p))
+
+def mes(data):
+        return ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"][data.month-1]
+
+def lerArquivo():
+	f = open("resposta.txt","r")
+	status = f.readline()
+	if (status == "STATUS         0 OK\n"):
+		nome = f.readline()
+		curso = f.readline()
+		cpf = f.readline()
+		nascimento = f.readline()
+		foto = f.readline()
+		
+		nome = nome[15:len(nome)-1]
+		curso = curso[15:len(curso)-1]
+		cpf = cpf[15:len(cpf)-1]
+		nascimento = nascimento[15:len(nascimento)-1]
+		foto = foto[15:len(foto)-1]
+		
+		# print (nome)
+		# print (curso)
+		# print (cpf)
+		# print (nascimento)
+		
+		return [nome, curso, cpf, nascimento, foto]
+	else:
+		print("Erro de leitura do arquivo resposta.txt")
+
+
+def gerarDocumento():
         dre = sys.argv[1]
         makeQRC(dre)
-        nome = registro[dre][0]
-        curso = registro[dre][1]
-        cpf = registro[dre][2] 
-        nascimento = registro[dre][3]
                 
+        nome, curso, cpf, nascimento, foto = lerArquivo()
+
         f = open("D"+dre+".html","w")
         f.write("<html><head><title>Documento de Registro do Estudante - "+dre+"</title></head>")
         f.write("<body bgcolor=#000>")
@@ -58,9 +98,13 @@ def gerarDocumento(registro):
         f.write("<img src=\"F"+dre+".png\" class=\"wdn-stretch rounded-corners\">")
         f.write("<img src=\"QR"+dre+".png\" class=\"wdn-stretch qrc\">")
         f.write("</div>")
-	f.write("</body></html>")
+        f.write("</body></html>")
         f.write("")
         f.close()
 
 
+################
 
+
+lerArquivo()
+gerarDocumento()
