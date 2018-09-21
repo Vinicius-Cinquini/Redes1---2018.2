@@ -1,6 +1,7 @@
-import sys, datetime, qrcode
-import os.path
+import sys, io, datetime, qrcode
+#import os.path
 from os import path
+from PIL import Image
 
 def makeQRC(dre):
         qrSize = 450
@@ -36,14 +37,31 @@ def lerResposta():
                 # print (cpf)
                 # print (nascimento)
 
-                return [nome, curso, cpf, nascimento, foto]
+                #reconstruirFoto3x4()
+                gerarDocumento(dre, nome, curso, cpf, nascimento, foto)
+                
+                #return [nome, curso, cpf, nascimento, foto]
+
+        elif (status[14] == "1"):
+                print("Falha de autenticação")
+
         else:
                 print("Erro de leitura do arquivo resposta.txt")
 
+def reconstruirFoto3x4():
+	arq = open("resposta.txt", "r")
+	for i in range(0,6):
+		byteArray = arq.readline()[15:-1]
+	#print(str(i)+" : "+byteArray)
+	f = open("FC"+dre+".png","w+")
+	f.write(byteArray)
+	f.close()
+	#image = Image.open(io.BytesIO(byteArray))
+	#image.show()
 
-def gerarDocumento(dre):
+def gerarDocumento(dre, nome, curso, cpf, nascimento, foto):
         makeQRC(dre)
-        nome, curso, cpf, nascimento, foto = lerResposta()
+        #nome, curso, cpf, nascimento, foto = lerResposta()
 
         f = open("D"+dre+".html","w")
         f.write("<html><head><title>Documento de Registro do Estudante - "+dre+"</title></head>")
@@ -104,6 +122,5 @@ def lerRequest():
 
 dre = lerRequest()
 lerResposta()
-gerarDocumento(dre)
 #os.remove('resposta.txt')
 

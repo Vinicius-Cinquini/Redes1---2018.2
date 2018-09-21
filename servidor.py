@@ -1,68 +1,20 @@
 import sys, io, datetime, qrcode
-#from PIL import Image #, ImageDraw, ImageFont
-import registros
+from PIL import Image #, ImageDraw, ImageFont
+from registros import registro
+
+#@app.route("/")
 
 hoje = datetime.datetime.now()
-
 request = open("request.txt", "r")
 dre = request.readline()[15:-1]
 password = request.readline()[15:-1]
-#print ("DRE solicitado: "+dre)
-#print ("Senha digitada: "+password)
-
-
-######## REGISTROS #########
-#Salvar em outro arquivo e importar?
-registro = {
-        "123456789" : [
-                "Fulano de Tal com Sobrenome Comprido",
-                "Engenharia de Computação e Informação",
-                "000.111.222-33",
-                "01/01/2001"
-                ],
-
-        "000000000" : [
-                "Doctor Stephen Strange",
-                "Artes Místicas Kamartajianas",
-                "012.543.678-90",
-                "10/07/1963"
-                ],
-
-        "000000001" : [
-                "Luna Lovegood",
-                "Magia e Bruxaria",
-                "123.987.345-65",
-                "13/02/1981"
-                ],
-
-        "000000002" : [
-                "Mordenkainen de Yatil",
-                "Magia Vanciana e Economia de Slots",
-                "135.246.753-02",
-                "10/12/1972"
-                ],
-
-        "000000003" : [
-                "Robin \"Avatar\" Daraen",
-                "Tática Mágica com Ênfase em Fogo e Trovão",
-                "246.135.864-97",
-                "13/02/1981"
-                ],
-
-        "000000004" : [
-                "Dorian Pavus",
-                "Arcanática Tevinteriana",
-                "192.168.000-01",
-                "25/12/1982"
-                ]
-}
 
 def foto3x4():
-        foto = Image.open("F"+sys.argv[1]+".png")
-        byteArray = io.BytesIO()
-        foto.save(byteArray, format="PNG")
-        byteArray = byteArray.getvalue()
-        return byteArray
+	foto = Image.open("F"+dre+".png")
+	byteArray = io.BytesIO()
+	foto.save(byteArray, format="PNG")
+	byteArray = byteArray.getvalue()
+	return byteArray
 
 """
 def montarMensagem(registro):
@@ -84,12 +36,19 @@ def montarArquivo(registro):
         arq.write("CURSO          "+registro[dre][1]+"\n")
         arq.write("CPF            "+registro[dre][2]+"\n")
         arq.write("NASCIMENTO     "+registro[dre][3]+"\n")
-        #arq.write("FOTO           "+str(foto3x4())+"\n\n")
+        arq.write("FOTO           "+str(foto3x4())+"\n\n")
         arq.close()
 
+def montarFalhaAut():
+	arq = open("resposta.txt","w+")
+	arq.write("STATUS        1 FALHA DE AUTENTICAÇÃO\n")
 
-######## EXECUTANDO ########
+def main():
+	if(password == registro[dre][4]):
+		montarArquivo(registro)
+	else:
+		montarFalhaAut()
 
 #montarMensagem(registro)
-montarArquivo(registro)
-
+#montarArquivo(registro)
+main()

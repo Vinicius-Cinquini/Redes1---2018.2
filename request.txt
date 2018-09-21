@@ -1,3 +1,3 @@
-GET            000000004
-PASS           blah
+GET            000000000
+PASSWORD       @Shamballa
 

@@ -5,7 +5,7 @@ def gerarRequest():
     password=sys.argv[2]
     arq=open("request.txt","w")
     arq.write("GET            "+dre+"\n")
-    arq.write("PASS           "+password+"\n\n")
+    arq.write("PASSWORD       "+password+"\n\n")
     arq.close()
 
 gerarRequest()
