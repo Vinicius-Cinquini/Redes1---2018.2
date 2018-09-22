@@ -2,6 +2,7 @@ import sys, io, datetime, qrcode
 #import os.path
 from os import path
 from PIL import Image
+from array import array
 
 def makeQRC(dre):
         qrSize = 450
@@ -30,14 +31,14 @@ def lerResposta():
                 curso = f.readline()[15:-1]
                 cpf = f.readline()[15:-1]
                 nascimento = f.readline()[15:-1]
-                foto = f.readline()[15:-1]
+                foto = f.readline()[15:]
 
                 # print (nome)
                 # print (curso)
                 # print (cpf)
                 # print (nascimento)
 
-                #reconstruirFoto3x4()
+                reconstruirFoto3x4() ####################################################
                 gerarDocumento(dre, nome, curso, cpf, nascimento, foto)
                 
                 #return [nome, curso, cpf, nascimento, foto]
@@ -49,6 +50,15 @@ def lerResposta():
                 print("Erro de leitura do arquivo resposta.txt")
 
 def reconstruirFoto3x4():
+	arq = open("resposta.txt","r")
+	for i in range(0,6):
+		byteString = arq.readline()[15:-1]
+	#f3x4 = Image.frombytes("RGB", (850, 1134), byteString.encode('utf-8'),'raw')
+	f3x4 = Image.frombytes("RGB", (850, 1134), byteString.encode('utf-16'),'raw')
+	f3x4.save("FC"+dre+".png")
+	
+
+'''
 	arq = open("resposta.txt", "r")
 	for i in range(0,6):
 		byteArray = arq.readline()[15:-1]
@@ -58,6 +68,8 @@ def reconstruirFoto3x4():
 	f.close()
 	#image = Image.open(io.BytesIO(byteArray))
 	#image.show()
+'''
+
 
 def gerarDocumento(dre, nome, curso, cpf, nascimento, foto):
         makeQRC(dre)

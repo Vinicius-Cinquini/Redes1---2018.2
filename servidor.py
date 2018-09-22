@@ -36,7 +36,7 @@ def montarArquivo(registro):
         arq.write("CURSO          "+registro[dre][1]+"\n")
         arq.write("CPF            "+registro[dre][2]+"\n")
         arq.write("NASCIMENTO     "+registro[dre][3]+"\n")
-        arq.write("FOTO           "+str(foto3x4())+"\n\n")
+        arq.write("FOTO           "+str(foto3x4()))
         arq.close()
 
 def montarFalhaAut():

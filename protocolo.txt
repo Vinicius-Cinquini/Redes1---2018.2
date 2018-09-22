@@ -1,29 +1,32 @@
 # GET request:
 #
-#	GET xxxxxxxxx
-#	PASS ....................
+#	GET            xxxxxxxxx
+#	PASSWORD       ..................
 #
-
 
 
 # Resposta do servidor:
 #
-#	STATUS 0 OK
-#	NOME Fulano de Tal
-#	CURSO Título do curso
-#	CPF xxx.xxx.xxx-xx
-#	NASC dd/mm/yyyy
-#	FOTO <3x4 convertida em bytestream pelo Python>
+#	STATUS         0 OK
+#	NOME           Fulano de Tal
+#	CURSO          Título do curso
+#	CPF            xxx.xxx.xxx-xx
+#	NASC           dd/mm/yyyy
+#	FOTO           <3x4 convertida em bytestream pelo Python>
 
 
 
 
+Convertendo imagem em byteArray
 
-import io
+	import io
 
-img = Image.open(fh, mode='r')
-roiImg = img.crop(box)
+	img = Image.open(fh, mode='r')
+	roiImg = img.crop(box)
 
-imgByteArr = io.BytesIO()
-roiImg.save(imgByteArr, format='PNG')
-imgByteArr = imgByteArr.getvalue()
+	imgByteArr = io.BytesIO()
+	roiImg.save(imgByteArr, format='PNG')
+	imgByteArr = imgByteArr.getvalue()
+
+
+850x1134 pixels
