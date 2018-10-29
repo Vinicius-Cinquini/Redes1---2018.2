@@ -13,7 +13,7 @@ Resposta do servidor:
 STATUS          0 OK            Mensagens abaixo
 CURSO           XXX             3 chars [0-9]
 DRE             XXXXXXXXX       9 chars [0-9]
-NASC            DDMMYYYY        8 chars [0-0]
+NASC            DDMMYYYY         8 chars [0-0]
 TAMANHO	        XX              2 chars [0-9] (len)
 NOME            Fulano de Tal   variável alpha
 FOTO            byteArray       variável bytes em hex
