@@ -1,8 +1,9 @@
-import sys, io, datetime, qrcode
+import sys, datetime, qrcode 
 #import os.path
 from os import path
 from PIL import Image
 from array import array
+from io import *
 
 def makeQRC(dre):
         qrSize = 450
@@ -38,7 +39,7 @@ def lerResposta():
                 # print (cpf)
                 # print (nascimento)
 
-                reconstruirFoto3x4() ####################################################
+#                reconstruirFoto3x4() ####################################################
                 gerarDocumento(dre, nome, curso, cpf, nascimento, foto)
                 
                 #return [nome, curso, cpf, nascimento, foto]
@@ -54,7 +55,9 @@ def reconstruirFoto3x4():
 	for i in range(0,6):
 		byteString = arq.readline()[15:-1]
 	#f3x4 = Image.frombytes("RGB", (850, 1134), byteString.encode('utf-8'),'raw')
-	f3x4 = Image.frombytes("RGB", (850, 1134), byteString.encode('utf-16'),'raw')
+	#f3x4 = Image.frombytes("RGB", (850, 1134), byteString.encode('utf-16'),'raw')
+	#f3x4 = Image.new()
+	f3x4 = Image.open(StringIO(byteString))
 	f3x4.save("FC"+dre+".png")
 	
 

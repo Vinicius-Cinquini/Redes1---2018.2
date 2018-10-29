@@ -1,50 +1,50 @@
 registro = {
-        "123456789" : [
-                "Fulano de Tal com Sobrenome Comprido",
-                "Engenharia de Computação e Informação",
-                "000.111.222-33",
-                "01/01/2001",
-                "Bazinga!"
+        "000.111.222-33": [					#CPF
+                "Fulano de Tal com Sobrenome Comprido",		#Nome
+                "Engenharia de Computação e Informação",	#Curso
+                "123456789",					#DRE
+                "01/01/2001",					#Nascimento
+                "Bazinga!"					#Senha
                 ],
 
-        "000000000" : [
+        "111.222.333-44": [
                 "Doctor Stephen Strange",
                 "Artes Místicas Kamartajianas",
-                "012.543.678-90",
+                "000000000",
                 "10/07/1963",
-                "@Shamballa"
+                "Shamballa"
                 ],
 
-        "000000001" : [
+        "123.987.345-65": [
                 "Luna Lovegood",
                 "Magia e Bruxaria",
-                "123.987.345-65",
+                "000000001",
                 "13/02/1981",
                 "BabbityRabbity :D"
                 ],
 
-        "000000002" : [
+        "135.246.753-02": [
                 "Mordenkainen de Yatil",
                 "Magia Vanciana e Economia de Slots",
-                "135.246.753-02",
+                "000000002",
                 "10/12/1972",
                 "C1rcl3 0f 31GHT........"
                 ],
 
-        "000000003" : [
+        "246.135.864-97": [
                 "Robin \"Avatar\" Daraen",
                 "Tática Mágica com Ênfase em Fogo e Trovão",
-                "246.135.864-97",
+                "000000003",
                 "13/02/1981",
                 "teLLius"
                 ],
 
-        "000000004" : [
+        "192.168.000-01": [
                 "Dorian Pavus",
                 "Arcanática Tevinteriana",
-                "192.168.000-01",
+                "000000004",
                 "25/12/1982",
-                "INQUITISION"
+                "INQUISITION"
                 ],
 }
 
