@@ -1,0 +1,32 @@
+\documentclass[12t]{article}
+
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackae[brazil]{babel}
+\usepackage[latinl]{inputenc}
+
+\sloppy
+
+\title{Relatório do Trabalho 1 de Redes\\ 2018.2}
+
+\author{Vinicius Mascarenhas\inst{1} }
+
+\address{Núcleo de Comptação Eletrônica - Universidade Federal do Rio de Janeiro}
+
+\begin{document}
+
+\maketitle
+
+\begin{resumo}
+	Este relatório se refere a um trabalho da disciplina de Redes, ministrada pelo prof. Cláudio Micelli. O trabalho em questão consiste na concepção e implementação de um protocolo de comunicação entre cliente e servidor para geração de um hipotético documento de estudante com certos dados previamente registrados no lado do servidor, como foto, curso, status de matrícula, DRE, data de nascimento e nome completo. O dado a ser utilizado como entrada para geração e impressão do documento é o CPF.
+\end{resumo}
+
+\section{O Princípio}
+	Inicialmente, a turma havia definido o protocolo como uma troca de mensagens de texto (strings) com múliplas linhas, encabeçadas por palavras-chave em caixa alta e um padding que, somado àquelas, completaria 16 caracteres no início de cada linha (0 a 15), efetivamente iniciando o payload de cada comando na posição 16. No entanto, devido à facilidade de comunicação via objetos passados por formulários em uma página web que o Flask fornece, descartamos o protocolo previamente definido, em prol do uso de  HTML.
+
+\section{O Programa}
+	O código foi escrito em Python 3, com o benefício do framework Flask, em um terminal rodando Vim. Foram criados um arquivo servidor.py e os seguintes templates: index.html, documento.html, e erro.html. As fotos de usuários ficam no subdiretório fotos.
+	O script servidor.py renderiza uma página de login com o template index.html, recebe os parâmetros passados pelo formulário, e realiza uma série de validações. CPF deve estar preenchido, senha deve estar correta, o usuário solicitado deve ter foto salva na pasta com o nome correto (F concatenado com o CPF e a extensão .png), e deve ter matrícula ativa. Passando em todas as validações, o programa gera um QR Code (cujo conteúdo é o CPF, para poupar futuras e repetidas digitações) e renderiza a carteirinha utilizando o template documento.html, embutindo na página tanto a foto salva como o QR Code.
+	Em caso de erro em qualquer teste, a página renderizada com o template erro.html é criada com uma string que diz qual foi o erro, para que se possa tomar a devida providência. Uma senha incorreta pode ser mais fácil de resolver do que uma foto não registrada junto à secretaria.
+
