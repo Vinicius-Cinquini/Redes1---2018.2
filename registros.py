@@ -69,6 +69,15 @@ registro = {
                 "Who knows",
                 "albion",
 		0
+		],
+	
+	"555.666.777-88" : [
+		"Mystra",
+		"Magia Vanciana com Ênfase na Trama Arcana",
+		"987654321",
+		"05/06/1375",
+		"8pontas",
+		1
 		]
 }
 

@@ -1,3 +1,0 @@
-GET            000000000
-PASSWORD       @Shamballa
-
